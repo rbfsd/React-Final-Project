@@ -1,5 +1,3 @@
-@charset "utf-8";
-
 body {
   font-family: Arial;
   background-color: whitesmoke;
@@ -26,9 +24,9 @@ main {
   box-shadow: 0 2px 4px #0003, 0 25px 50px #0000001a;
 }
 
-main > div,
-main > form {
-  padding: 0.5rem 1rem;
+main>div,
+main>form {
+  padding: 0.5rem;
   border-bottom: 1px solid lightgray;
   display: flex;
   align-items: center;
@@ -36,7 +34,7 @@ main > form {
   justify-content: space-between;
 }
 
-main > div:has(input[type="checkbox"]) {
+main>div:has(input[type="checkbox"]) {
   justify-content: inherit;
 }
 
@@ -47,7 +45,7 @@ input {
   border: 0;
 }
 
-input:checked + input {
+input:checked+input {
   text-decoration: line-through;
 }
 
@@ -63,7 +61,7 @@ input[type="checkbox"] {
 
 button {
   cursor: pointer;
-  padding: 0.5rem 0.5rem;
+  padding: 0.5rem;
   background-color: white;
   font-family: inherit;
   font-size: 85%;

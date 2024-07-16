@@ -1,8 +1,16 @@
+import {api} from "./api";
+import session from 'cookie-session';
 import express from "express";
-import { api } from "./api.js";
+import { auth } from "./auth";
 
 const app = express();
+app.use(
+  session({
+    secret: process.env["SESSION_SECRET"]|| "secret",
+  })
+)
+app.use(auth)
 app.use(api);
-
-app.get("*", (req, res) => res.send(`api Server - path: "${req.path}"`))
-app.listen(3002, () => console.log("Server started"));
+app.get("/api/hi", (_req, res) => res.send("hello"));
+app.use(express.static(process.cwd() + "/dist"));
+app.listen(process.env["PORT"] || 3002, () => console.log("Started"))
