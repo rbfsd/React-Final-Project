@@ -1,18 +1,15 @@
-import { remultExpress } from "remult/remult-express";
-import { Task } from "../shared/Tasks";
-import { TaskController } from "../shared/TasksController";
-import {createPostgresConnection} from "remult/postgres";
+// api.ts
 
+import express from "express"
+import { remultExpress } from "remult/remult-express"
+import { JsonDataProvider } from "remult"
+import { JsonEntityFileStorage } from "remult/server"
 
-export const api = remultExpress({
-  entities: [Task],
-  controllers: [TaskController],
-  getUser: (req) => req.session!["user"],
-  dataProvider: createPostgresConnection({
+const app = express()
 
-    connectionString: 
-      process.env["DATABASE_URL"]|| 
-      "postgres;//postgres:MASTERKEY@localhost/postgres",
-  }),
-  ensureSchema:false
-});
+app.use(
+  remultExpress({
+    dataProvider: async () =>
+      new JsonDataProvider(new JsonEntityFileStorage("./db"))
+  })
+)
